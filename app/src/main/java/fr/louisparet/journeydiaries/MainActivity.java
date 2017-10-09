@@ -21,8 +21,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.showStartup();
         binding = DataBindingUtil.setContentView(this,R.layout.main_activity);
+        this.showStartup();
     }
 
     public void showStartup() {
