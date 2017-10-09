@@ -1,12 +1,13 @@
 package fr.louisparet.journeydiaries.models;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 /**
  * Created by lparet on 09/10/17.
  */
 
-public class Journey {
+public class Journey implements Serializable {
     private String name;
     private Calendar from;
     private Calendar to;

@@ -1,6 +1,7 @@
 package fr.louisparet.journeydiaries.fragments;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,39 +11,41 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import fr.louisparet.journeydiaries.MainActivity;
 import fr.louisparet.journeydiaries.R;
 import fr.louisparet.journeydiaries.adapters.JourneyListAdapter;
+import fr.louisparet.journeydiaries.databinding.JourneyCreatorBinding;
 import fr.louisparet.journeydiaries.databinding.JourneysFragmentBinding;
 import fr.louisparet.journeydiaries.models.Journey;
 import fr.louisparet.journeydiaries.viewmodel.JourneyViewModel;
 
 /**
- * Created by lparet on 09/10/17.
+ * Created by hugo.blanc on 09/10/17.
  */
 
-public class JourneysFragment extends Fragment {
+public class CreatorFragment extends Fragment {
+
+
+    private MainActivity mainActivity;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        JourneysFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.journeys_fragment,container,false);
 
-        List<Journey> journeys = new ArrayList<>();
-        journeys.add(0, new Journey("Copenhagen", new GregorianCalendar(2017, 12, 24), new GregorianCalendar(2017, 12, 31)));
-        journeys.add(1, new Journey("Paris", new GregorianCalendar(2018, 2, 1), new GregorianCalendar(2018, 2, 8)));
-
-        binding.journeysList.setAdapter(new JourneyListAdapter(journeys));
-        binding.journeysList.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
+        JourneyCreatorBinding binding = DataBindingUtil.inflate(inflater, R.layout.journey_creator,container,false);
+        binding.setJvm(new JourneyViewModel(new Journey()));
         return binding.getRoot();
     }
 
-
-    public void onJourneyClick(View v) {
-
-        System.out.println("OnClick ");
+    @Override
+    public void onAttach(Context context){
+        this.mainActivity. = (MainActivity)context;
     }
+
+
+
 }
