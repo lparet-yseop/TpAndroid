@@ -18,6 +18,7 @@ import fr.louisparet.journeydiaries.R;
 import fr.louisparet.journeydiaries.adapters.JourneyListAdapter;
 import fr.louisparet.journeydiaries.databinding.JourneysFragmentBinding;
 import fr.louisparet.journeydiaries.models.Journey;
+import fr.louisparet.journeydiaries.sqlite.JourneyService;
 import fr.louisparet.journeydiaries.viewmodel.JourneyViewModel;
 
 /**
@@ -30,10 +31,9 @@ public class JourneysFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         JourneysFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.journeys_fragment,container,false);
-
-        List<Journey> journeys = new ArrayList<>();
-        journeys.add(0, new Journey("Copenhagen", new GregorianCalendar(2017, 12, 24), new GregorianCalendar(2017, 12, 31)));
-        journeys.add(1, new Journey("Paris", new GregorianCalendar(2018, 2, 1), new GregorianCalendar(2018, 2, 8)));
+        JourneyService journeyService = JourneyService.getInstance(binding.getRoot().getContext());
+        List<Journey> journeys;
+        journeys = journeyService.findAll();
 
         binding.journeysList.setAdapter(new JourneyListAdapter(journeys));
         binding.journeysList.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
