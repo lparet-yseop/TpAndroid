@@ -15,7 +15,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter, Se
 
 
     @Override
-    public void onSaveData(String data) {
-        view.saveData(data);
+    public void onSaveData(String name, String from, String to) {
+        view.saveData(name, from, to);
     }
 }

@@ -45,6 +45,9 @@ public class JourneyService {
         db.beginTransaction();
         try {
             ContentValues values = new ContentValues();
+            if(journey.getId() > 0){
+                values.put(SqlLiteOpener.KEY_JOURNEY_ID, journey.getId());
+            }
             values.put(SqlLiteOpener.KEY_JOURNEY_NAME, journey.getName());
             values.put(SqlLiteOpener.KEY_DATE_FROM, journey.getFrom().getTimeInMillis()/1000);
             values.put(SqlLiteOpener.KEY_DATE_TO, journey.getTo().getTimeInMillis()/1000);
@@ -67,6 +70,41 @@ public class JourneyService {
     }
 
 
+    public Journey update(Journey journey){
+
+        SQLiteDatabase db = this.sqlLiteOpener.getWritableDatabase();
+        long nbLines = -1;
+
+        db.beginTransaction();
+        try {
+            ContentValues values = new ContentValues();
+            values.put(SqlLiteOpener.KEY_JOURNEY_ID, journey.getId());
+            values.put(SqlLiteOpener.KEY_JOURNEY_NAME, journey.getName());
+            values.put(SqlLiteOpener.KEY_DATE_FROM, journey.getFrom().getTimeInMillis()/1000);
+            values.put(SqlLiteOpener.KEY_DATE_TO, journey.getTo().getTimeInMillis()/1000);
+
+            String[] array = {journey.getId()+""};
+            nbLines = db.update(SqlLiteOpener.TABLE_JOURNEY, values, " id = ? ", array);
+
+            if (nbLines > 0) {
+                db.setTransactionSuccessful();
+            }
+        } catch (Exception e) {
+            Log.d("SQL","Erreur pour ajouter ");
+        } finally {
+            db.endTransaction();
+        }
+        if(nbLines > 0){
+            return journey;
+        } else {
+            return null;
+        }
+
+    }
+
+
+
+
 
     public List<Journey> findAll(){
         SQLiteDatabase db = this.sqlLiteOpener.getWritableDatabase();
@@ -77,6 +115,7 @@ public class JourneyService {
             if (cursor.moveToFirst()) {
                 do {
                     Journey journey = new Journey();
+                    journey.setId(cursor.getInt(cursor.getColumnIndex(SqlLiteOpener.KEY_JOURNEY_ID)));
                     journey.setName(cursor.getString(cursor.getColumnIndex(SqlLiteOpener.KEY_JOURNEY_NAME)));
                     journey.setFrom(convertStrTimestampToCalendar(cursor.getString(cursor.getColumnIndex(SqlLiteOpener.KEY_DATE_FROM))));
                     journey.setTo(convertStrTimestampToCalendar(cursor.getString(cursor.getColumnIndex(SqlLiteOpener.KEY_DATE_TO))));
@@ -94,6 +133,32 @@ public class JourneyService {
     }
 
 
+    public Journey findOne(int id){
+        SQLiteDatabase db = this.sqlLiteOpener.getWritableDatabase();
+        db.beginTransaction();
+        Journey journey = new Journey();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + SqlLiteOpener.TABLE_JOURNEY + " WHERE id = '"+id+"';", null);
+        try {
+            if (cursor.moveToFirst()) {
+                    journey.setId(cursor.getInt(cursor.getColumnIndex(SqlLiteOpener.KEY_JOURNEY_ID)));
+                    journey.setName(cursor.getString(cursor.getColumnIndex(SqlLiteOpener.KEY_JOURNEY_NAME)));
+                    journey.setFrom(convertStrTimestampToCalendar(cursor.getString(cursor.getColumnIndex(SqlLiteOpener.KEY_DATE_FROM))));
+                    journey.setTo(convertStrTimestampToCalendar(cursor.getString(cursor.getColumnIndex(SqlLiteOpener.KEY_DATE_TO))));
+
+            }
+        } catch (Exception e) {
+            Log.d("SQL - Journey", "Error pour selectionner");
+        } finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+        }
+        return journey;
+    }
+
+
+
+
 
     public static Calendar convertStrTimestampToCalendar(String timestamp){
         long timestampLong = Long.parseLong(timestamp)*1000;
@@ -104,7 +169,7 @@ public class JourneyService {
     }
 
     public static Calendar converteStringToDate(String dateString){
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM.dd.yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         java.util.Date convertedDate = new java.util.Date();
         Calendar cal = null;
         try {

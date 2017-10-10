@@ -30,13 +30,15 @@ public class JourneyViewModel extends BaseObservable {
         this.journey = journey;
     }
 
+    public int getId(){return journey.getId();}
+    public void setId(int id){journey.setId(id);}
     public String getName() {
         return journey.getName();
     }
     public void setName(String name){ journey.setName(name);}
     public String getFrom() {
         Calendar cal = journey.getFrom();
-        DateFormat sdf = SimpleDateFormat.getDateInstance(SimpleDateFormat.MEDIUM,
+        DateFormat sdf = SimpleDateFormat.getDateInstance(SimpleDateFormat.DATE_FIELD,
                 Locale.getDefault());
         return sdf.format(cal.getTime());
     }
@@ -45,7 +47,7 @@ public class JourneyViewModel extends BaseObservable {
     }
     public String getTo() {
         Calendar cal = journey.getTo();
-        DateFormat sdf = SimpleDateFormat.getDateInstance(SimpleDateFormat.MEDIUM,
+        DateFormat sdf = SimpleDateFormat.getDateInstance(SimpleDateFormat.DATE_FIELD,
                 Locale.getDefault());
         return sdf.format(cal.getTime());
     }

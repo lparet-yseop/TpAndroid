@@ -6,9 +6,9 @@ package fr.louisparet.journeydiaries.interaction;
 
 public class MainActivityContract {
     public interface Presenter {
-        public void onSaveData(String data);
+        public void onSaveData(String name, String from, String to);
     }
     public interface View {
-        public void saveData(String data);
+        public void saveData(String name, String from, String to);
     }
 }

@@ -13,6 +13,14 @@
             android:onClick="onJourneyClick"
             />
 
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/add_map"
+            android:layout_gravity="bottom|start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onMapGeoloc"
+            />
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/journeys_list"
             android:layout_width="match_parent"

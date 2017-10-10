@@ -40,17 +40,17 @@
             android:layout_height="wrap_content"
             android:id="@+id/button2"
             android:layout_weight="0.05"
-            android:onClick="@{() -> presenter.onSaveData(name.getText().toString())}"/>
+            android:onClick="@{() -> presenter.onSaveData(name.getText().toString(), textDateFrom.getText().toString(), editText3.getText().toString())}"/>
 
         <!--@{() -> jvm.saveJourney(name.getText().toString(), textDateFrom.getText().toString(), editText3.getText().toString())}-->
 
-        <Button
-            android:text="Annuler"
-            android:layout_width="204dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/button3"
-            android:layout_weight="0.06"
-            android:onClick="goBack"/>
+        <!--<Button-->
+            <!--android:text="Annuler"-->
+            <!--android:layout_width="204dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/button3"-->
+            <!--android:layout_weight="0.06"-->
+            <!--android:onClick="goBack"/>-->
     </LinearLayout>
 
     <data>

@@ -8,6 +8,7 @@ import java.util.Calendar;
  */
 
 public class Journey implements Serializable {
+    private int id;
     private String name;
     private Calendar from;
     private Calendar to;
@@ -18,10 +19,26 @@ public class Journey implements Serializable {
         to = Calendar.getInstance();
     }
 
+    public Journey(int id, String name, Calendar from, Calendar to) {
+        this.id = id;
+        this.name = name;
+        this.from = from;
+        this.to = to;
+    }
+
     public Journey(String name, Calendar from, Calendar to) {
         this.name = name;
         this.from = from;
         this.to = to;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Calendar getFrom() {
