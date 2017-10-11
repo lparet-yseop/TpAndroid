@@ -66,17 +66,20 @@ public class SqlLiteOpener extends SQLiteOpenHelper {
                 KEY_JOURNEY_NAME + " TEXT," +
                 KEY_DATE_FROM + " INTEGER," +
                 KEY_DATE_TO + " INTEGER" +
-                ");";
+                ")";
 
-        CREATE_TABLES += "CREATE TABLE " + TABLE_MARKER +
+        db.execSQL(CREATE_TABLES);
+
+        CREATE_TABLES = "CREATE TABLE " + TABLE_MARKER +
                 "(" +
                 KEY_MARKER_ID + " INTEGER PRIMARY KEY," + // Define a primary key
                 KEY_MARKER_LONGITUDE + " TEXT," +
-                KEY_MARKER_LONGITUDE + " TEXT," +
+                KEY_MARKER_LATITUDE+ " TEXT," +
                 KEY_MARKER_NAME + " TEXT" +
-                ");";
+                ")";
 
         db.execSQL(CREATE_TABLES);
+
     }
 
     // Called when the database needs to be upgraded.
@@ -86,8 +89,9 @@ public class SqlLiteOpener extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion != newVersion) {
             // Simplest implementation is to drop all old tables and recreate them
-            String drop = "DROP TABLE IF EXISTS " + TABLE_JOURNEY;
-            drop += "DROP TABLE IF EXISTS " + TABLE_MARKER;
+            String drop = "DROP TABLE IF EXISTS " + TABLE_JOURNEY + " ;";
+            db.execSQL(drop);
+            drop = "DROP TABLE IF EXISTS " + TABLE_MARKER + " ;";
             db.execSQL(drop);
             onCreate(db);
         }

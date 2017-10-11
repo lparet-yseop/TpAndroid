@@ -30,7 +30,7 @@ public class MarkerService extends AbstractService<Marker> {
 
 
     public Marker update(Marker marker){
-        Long lines = super.update(createContenValue(marker), marker.getId(), SqlLiteOpener.TABLE_MARKER);
+        Long lines = super.update(createContentValue(marker), marker.getId(), SqlLiteOpener.TABLE_MARKER);
         if(lines > 0) {
             return marker;
         } else {
@@ -40,11 +40,11 @@ public class MarkerService extends AbstractService<Marker> {
 
 
     public Marker save(Marker marker){
-        marker.setId(super.save(createContenValue(marker), SqlLiteOpener.TABLE_MARKER));
+        marker.setId(super.save(createContentValue(marker), SqlLiteOpener.TABLE_MARKER));
         return marker;
     }
 
-    private ContentValues createContenValue(Marker marker){
+    private ContentValues createContentValue(Marker marker){
         ContentValues contentValues = new ContentValues();
         contentValues.put(SqlLiteOpener.KEY_MARKER_LATITUDE, marker.getLatitude().toString());
         contentValues.put(SqlLiteOpener.KEY_MARKER_LONGITUDE, marker.getLongitude().toString());
