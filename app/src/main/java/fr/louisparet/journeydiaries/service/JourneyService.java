@@ -1,4 +1,4 @@
-package fr.louisparet.journeydiaries.sqlite;
+package fr.louisparet.journeydiaries.service;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -14,6 +14,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import fr.louisparet.journeydiaries.models.Journey;
+import fr.louisparet.journeydiaries.sqlite.SqlLiteOpener;
 
 /**
  * Created by hugo.blanc on 10/10/17.

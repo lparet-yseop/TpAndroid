@@ -2,17 +2,14 @@ package fr.louisparet.journeydiaries.viewmodel;
 
 import android.content.Context;
 import android.databinding.BaseObservable;
-import android.view.View;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 import fr.louisparet.journeydiaries.models.Journey;
-import fr.louisparet.journeydiaries.sqlite.JourneyService;
+import fr.louisparet.journeydiaries.service.JourneyService;
 
 /**
  * Created by hugo.blanc on 09/10/17.

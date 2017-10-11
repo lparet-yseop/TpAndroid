@@ -9,17 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import fr.louisparet.journeydiaries.R;
 import fr.louisparet.journeydiaries.adapters.JourneyListAdapter;
 import fr.louisparet.journeydiaries.databinding.JourneysFragmentBinding;
 import fr.louisparet.journeydiaries.models.Journey;
-import fr.louisparet.journeydiaries.sqlite.JourneyService;
-import fr.louisparet.journeydiaries.viewmodel.JourneyViewModel;
+import fr.louisparet.journeydiaries.service.JourneyService;
 
 /**
  * Created by lparet on 09/10/17.
