@@ -1,8 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-
     package="fr.louisparet.journeydiaries">
 
+    <uses-feature android:name="android.hardware.location.gps"/>
+    <!--<uses-feature android:glEsVersion="0x00020000" android:required="true" />-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,11 +18,6 @@
 
         <meta-data android:name="com.google.android.maps.v2.API_KEY"
             android:value= "The Key you get from google" />
-
-
-        <uses-feature android:name="android.hardware.location.gps"/>
-        <uses-feature android:glEsVersion="0x00020000" android:required="true" />
-
 
         <activity
             android:name="fr.louisparet.journeydiaries.MainActivity"
