@@ -16,7 +16,7 @@ import fr.louisparet.journeydiaries.databinding.JourneyCreatorBinding;
 import fr.louisparet.journeydiaries.interaction.MainActivityContract;
 import fr.louisparet.journeydiaries.interaction.MainActivityPresenter;
 import fr.louisparet.journeydiaries.models.Journey;
-import fr.louisparet.journeydiaries.sqlite.JourneyService;
+import fr.louisparet.journeydiaries.service.JourneyService;
 import fr.louisparet.journeydiaries.viewmodel.JourneyViewModel;
 
 /**
