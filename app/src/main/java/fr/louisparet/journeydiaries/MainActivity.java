@@ -89,8 +89,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onMapGeoloc(View v){
-
-
         PermissionHelper permissionHelper = new PermissionHelper();
         GeolocFragment fragment = new GeolocFragment();
         permissionHelper.askPermission(fragment, this);

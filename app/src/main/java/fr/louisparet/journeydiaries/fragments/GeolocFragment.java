@@ -46,15 +46,10 @@ public class GeolocFragment extends Fragment implements OnMapReadyCallback, Goog
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-
         GeolocBinding binding = DataBindingUtil.inflate(inflater, R.layout.geoloc,container,false);
-        // context = binding.getRoot().getContext();
-
 
         MapFragment mapFragment = (MapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-
 
         binding.sendComment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,35 +66,17 @@ public class GeolocFragment extends Fragment implements OnMapReadyCallback, Goog
 
     }
 
-
-
-
     @Override
     public void onAttach(Context context){
-
         super.onAttach(context);
         this.mainActivity = (MainActivity)context;
-
-
-        MapFragment mapFragment = (MapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-
     }
 
     // API VERSION AVANT 23
     @Override
     public void onAttach(Activity activity){
-
         super.onAttach(activity);
         this.mainActivity = (MainActivity)activity;
-    }
-
-
-    public void getLocation(View v){
-//        PermissionHelper permissionHelper = new PermissionHelper();
-//
-//        permissionHelper.askPermission(this, this.mainActivity);
-
     }
 
     @Override
@@ -109,31 +86,25 @@ public class GeolocFragment extends Fragment implements OnMapReadyCallback, Goog
 
     @Override
     public void onMapReady(GoogleMap map) {
-
         map.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
         this.mmap = map;
-        gps=new GpsTracker(this.mainActivity);
-        double curlat=gps.getLatitude();
-        double curlon=gps.getLongitude();
-        LatLng currentpos=new LatLng(curlat, curlon);
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(curlat,curlon), 10));
-
         this.mmap.setOnMapLongClickListener(this);
+        try {
+            this.mmap.setMyLocationEnabled(true);
+        } catch (SecurityException ex) {
+            System.out.println("This is not possible.");
+        }
     }
-
-
-
 
     public void updateView(Location location){
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         updateView(latLng);
     }
 
-    public void updateView(LatLng latLng ){
-        this.mmap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5));
-        this.mmap.addMarker(new MarkerOptions().position(latLng).title("Marker"));
+    public void updateView(LatLng latLng) {
+        if(mmap != null) {
+            this.mmap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5));
+            this.mmap.addMarker(new MarkerOptions().position(latLng).title("Marker"));
+        }
     }
-
-
-
 }

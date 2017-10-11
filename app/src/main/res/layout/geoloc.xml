@@ -2,12 +2,7 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
-
     </data>
-
-
-
-
     <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -24,8 +19,6 @@
                 android:layout_column="0"
                 android:layout_height="290dp"
                 android:layout_weight="0.95" />
-
-
 
             <EditText
                 android:layout_width="match_parent"
@@ -48,7 +41,5 @@
             android:id="@+id/sendComment"
             android:layout_weight="0.95" />
 
-        </android.support.design.widget.CoordinatorLayout>
-
-
+    </android.support.design.widget.CoordinatorLayout>
 </layout>

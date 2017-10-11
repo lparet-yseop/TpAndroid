@@ -28,18 +28,14 @@ public class PermissionHelper implements LocationListener {
             ActivityCompat.requestPermissions(activity, permissions, 1);
         }
 
-
         LocationManager manager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
         manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 100, 100, this);
         manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 100, 100, this);
-
-
     }
 
     @Override
     public void onLocationChanged(Location newLocation) {
         System.out.println("Location Changed" + newLocation);
-
         this.geolocFragment.updateView(newLocation);
     }
 
