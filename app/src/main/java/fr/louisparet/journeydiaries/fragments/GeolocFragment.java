@@ -73,10 +73,6 @@ public class GeolocFragment extends Fragment implements OnMapReadyCallback, Goog
         return binding.getRoot();
     }
 
-
-
-
-
     private void initButton(){
 
     }
@@ -146,8 +142,9 @@ public class GeolocFragment extends Fragment implements OnMapReadyCallback, Goog
     public void updateView(LatLng latLng ){
         if(mmap != null) {
             this.mmap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5));
-        MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("Nouveau marqueur");
-        this.mmap.addMarker(markerOptions);
+            MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("Nouveau marqueur");
+            this.mmap.addMarker(markerOptions);
+        }
     }
 
 
