@@ -1,17 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-    <data></data>
-    <LinearLayout
-        android:orientation="vertical" android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+
+    </data>
+
+
+
+
+    <android.support.design.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="1">
+
+            <include android:id="@+id/mapcont" layout="@layout/map"
+                android:layout_width="match_parent"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:layout_height="290dp"
+                android:layout_weight="0.95" />
+
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:inputType="textPersonName"
+                android:text="Name"
+                android:ems="10"
+                android:id="@+id/editText2"
+                android:layout_weight="0.05" />
+
+        </LinearLayout>
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/add_map"
-            android:layout_gravity="center|start"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="getLocation"/>
+            android:clickable="true"
+            android:layout_gravity="bottom|end"
+            app:fabSize="mini"
+            app:srcCompat="@android:drawable/ic_menu_send"
+            android:id="@+id/sendComment"
+            android:layout_weight="0.95" />
+
+        </android.support.design.widget.CoordinatorLayout>
 
 
-    </LinearLayout>
 </layout>

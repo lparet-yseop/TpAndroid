@@ -46,9 +46,6 @@ public class JourneyService {
         db.beginTransaction();
         try {
             ContentValues values = new ContentValues();
-            if(journey.getId() > 0){
-                values.put(SqlLiteOpener.KEY_JOURNEY_ID, journey.getId());
-            }
             values.put(SqlLiteOpener.KEY_JOURNEY_NAME, journey.getName());
             values.put(SqlLiteOpener.KEY_DATE_FROM, journey.getFrom().getTimeInMillis()/1000);
             values.put(SqlLiteOpener.KEY_DATE_TO, journey.getTo().getTimeInMillis()/1000);

@@ -18,12 +18,22 @@ public class SqlLiteOpener extends SQLiteOpenHelper {
 
     // Table Names
     public static final String TABLE_JOURNEY = "journey";
+    public static final String TABLE_MARKER = "marker";
 
     // Journey Table Columns
     public static final String KEY_JOURNEY_ID = "id";
     public static final String KEY_JOURNEY_NAME = "name";
     public static final String KEY_DATE_FROM = "from_date";
     public static final String KEY_DATE_TO = "to_date";
+
+
+    // Marker Table Columns
+    public static final String KEY_MARKER_ID = "id";
+    public static final String KEY_MARKER_LONGITUDE = "longitude";
+    public static final String KEY_MARKER_LATITUDE = "latitude";
+    public static final String KEY_MARKER_NAME = "name";
+
+
 
     private static SqlLiteOpener sInstance;
 
@@ -50,15 +60,23 @@ public class SqlLiteOpener extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_POSTS_TABLE = "CREATE TABLE " + TABLE_JOURNEY +
+        String CREATE_TABLES = "CREATE TABLE " + TABLE_JOURNEY +
                 "(" +
                 KEY_JOURNEY_ID + " INTEGER PRIMARY KEY," + // Define a primary key
                 KEY_JOURNEY_NAME + " TEXT," +
                 KEY_DATE_FROM + " INTEGER," +
                 KEY_DATE_TO + " INTEGER" +
-                ")";
+                ");";
 
-        db.execSQL(CREATE_POSTS_TABLE);
+        CREATE_TABLES += "CREATE TABLE " + TABLE_MARKER +
+                "(" +
+                KEY_MARKER_ID + " INTEGER PRIMARY KEY," + // Define a primary key
+                KEY_MARKER_LONGITUDE + " TEXT," +
+                KEY_MARKER_LONGITUDE + " TEXT," +
+                KEY_MARKER_NAME + " TEXT" +
+                ");";
+
+        db.execSQL(CREATE_TABLES);
     }
 
     // Called when the database needs to be upgraded.
@@ -68,7 +86,9 @@ public class SqlLiteOpener extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion != newVersion) {
             // Simplest implementation is to drop all old tables and recreate them
-            db.execSQL("DROP TABLE IF EXISTS " + TABLE_JOURNEY);
+            String drop = "DROP TABLE IF EXISTS " + TABLE_JOURNEY;
+            drop += "DROP TABLE IF EXISTS " + TABLE_MARKER;
+            db.execSQL(drop);
             onCreate(db);
         }
     }
