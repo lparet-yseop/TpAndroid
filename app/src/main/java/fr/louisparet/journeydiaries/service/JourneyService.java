@@ -100,10 +100,6 @@ public class JourneyService {
 
     }
 
-
-
-
-
     public List<Journey> findAll(){
         SQLiteDatabase db = this.sqlLiteOpener.getWritableDatabase();
         db.beginTransaction();
@@ -153,10 +149,6 @@ public class JourneyService {
         }
         return journey;
     }
-
-
-
-
 
     public static Calendar convertStrTimestampToCalendar(String timestamp){
         long timestampLong = Long.parseLong(timestamp)*1000;

@@ -52,7 +52,6 @@ public class CreatorFragment extends Fragment implements MainActivityContract.Vi
         binding.setJvm(new JourneyViewModel(journeyLocal, context));
         binding.setPresenter(mainActivityPresenter);
 
-        //this.mainActivity.goBack();
         return binding.getRoot();
 
     }
@@ -69,7 +68,7 @@ public class CreatorFragment extends Fragment implements MainActivityContract.Vi
     public void onAttach(Activity activity){
 
         super.onAttach(activity);
-        this.mainActivity = (MainActivity)activity;
+        this.mainActivity = (MainActivity) activity;
     }
 
 

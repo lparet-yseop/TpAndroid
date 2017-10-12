@@ -7,10 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.EventObject;
 import java.util.List;
 
-import fr.louisparet.journeydiaries.models.Journey;
 import fr.louisparet.journeydiaries.sqlite.SqlLiteOpener;
 
 /**
