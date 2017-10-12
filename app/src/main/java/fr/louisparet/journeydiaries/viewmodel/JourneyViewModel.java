@@ -9,7 +9,6 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import fr.louisparet.journeydiaries.models.Journey;
-import fr.louisparet.journeydiaries.service.JourneyService;
 
 /**
  * Created by hugo.blanc on 09/10/17.
@@ -51,27 +50,4 @@ public class JourneyViewModel extends BaseObservable {
     public void setTo(String to){
         System.out.println(to);
     }
-
-
-    public void saveJourney(String name, String from, String to ) {
-
-        System.out.println(name + from +to);
-        this.journey.setName(name);
-        this.journey.setFrom(JourneyService.converteStringToDate(from));
-        this.journey.setTo(JourneyService.converteStringToDate(to));
-
-        JourneyService service = JourneyService.getInstance(this.context);
-        service.save(this.journey);
-    }
-
-
-    public void saveJourney() {
-
-        System.out.println("OnClick "+getName());
-    }
-
-
-
-
-
 }
