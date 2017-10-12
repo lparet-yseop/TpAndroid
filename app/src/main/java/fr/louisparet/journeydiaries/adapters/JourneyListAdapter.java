@@ -5,11 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 import fr.louisparet.journeydiaries.R;
 import fr.louisparet.journeydiaries.databinding.JourneyItemBinding;

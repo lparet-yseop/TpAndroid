@@ -8,38 +8,48 @@
             android:layout_height="match_parent">
 
         <LinearLayout
-            android:orientation="vertical"
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:weightSum="1">
 
-            <include android:id="@+id/mapcont" layout="@layout/map"
+            <include
+                android:id="@+id/mapcont"
+                layout="@layout/map"
                 android:layout_width="match_parent"
-                android:layout_row="0"
+                android:layout_height="wrap_content"
                 android:layout_column="0"
-                android:layout_height="290dp"
-                android:layout_weight="0.95" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:inputType="textPersonName"
-                android:text="Name"
-                android:ems="10"
-                android:id="@+id/editText2"
-                android:layout_weight="0.05" />
+                android:layout_row="0" />
 
         </LinearLayout>
 
-        <android.support.design.widget.FloatingActionButton
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            android:layout_gravity="bottom|end"
-            app:fabSize="mini"
-            app:srcCompat="@android:drawable/ic_menu_send"
-            android:id="@+id/sendComment"
-            android:layout_weight="0.95" />
+            android:layout_gravity="bottom"
+            android:layout_weight="0.95"
+            android:orientation="horizontal"><![CDATA[>
+
+            ]]>
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:background="@android:color/background_light"
+                android:ems="10"
+                android:hint="Note"
+                android:inputType="textPersonName"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/sendComment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Create" />
+        </LinearLayout>
 
     </android.support.design.widget.CoordinatorLayout>
 </layout>

@@ -20,7 +20,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@{jvm.name}"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAlignment="viewStart"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/background_dark"
+            android:textSize="24sp"
+            android:textStyle="bold" />
         <LinearLayout
             style="?android:attr/listSeparatorTextViewStyle"
             android:orientation="horizontal"
@@ -33,14 +37,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="@{jvm.from}" />
+                android:text="@{jvm.from}"
+                android:textColor="@android:color/background_dark" />
 
             <TextView
                 android:id="@+id/end_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="@{jvm.to}"  />
+                android:text="@{jvm.to}"
+                android:textColor="@android:color/background_dark" />
         </LinearLayout>
     </LinearLayout>
 </layout>
