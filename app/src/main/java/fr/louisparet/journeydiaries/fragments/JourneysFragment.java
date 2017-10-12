@@ -26,7 +26,7 @@ public class JourneysFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        JourneysFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.journeys_fragment,container,false);
+        JourneysFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.journeys_fragment, container, false);
         JourneyService journeyService = JourneyService.getInstance(binding.getRoot().getContext());
         List<Journey> journeys;
         journeys = journeyService.findAll();
@@ -34,11 +34,5 @@ public class JourneysFragment extends Fragment {
         binding.journeysList.setAdapter(new JourneyListAdapter(journeys));
         binding.journeysList.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
         return binding.getRoot();
-    }
-
-
-    public void onJourneyClick(View v) {
-
-        System.out.println("OnClick ");
     }
 }
