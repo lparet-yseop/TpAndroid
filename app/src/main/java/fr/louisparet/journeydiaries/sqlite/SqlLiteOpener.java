@@ -90,10 +90,10 @@ public class SqlLiteOpener extends SQLiteOpenHelper {
         if (oldVersion != newVersion) {
             // Simplest implementation is to drop all old tables and recreate them
             String drop = "DROP TABLE IF EXISTS " + TABLE_JOURNEY + " ;";
-            db.execSQL(drop);
+            // db.execSQL(drop);
             drop = "DROP TABLE IF EXISTS " + TABLE_MARKER + " ;";
-            db.execSQL(drop);
-            onCreate(db);
+            // db.execSQL(drop);
+            // onCreate(db);
         }
     }
 }
