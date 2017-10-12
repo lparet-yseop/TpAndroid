@@ -147,6 +147,7 @@ public class JourneyService {
                 cursor.close();
             }
         }
+        db.close();
         return journey;
     }
 

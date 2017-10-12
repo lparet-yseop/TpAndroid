@@ -5,7 +5,12 @@ import android.app.FragmentTransaction;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+
+import com.idescout.sql.SqlScoutServer;
+
+import java.io.File;
 
 import fr.louisparet.journeydiaries.databinding.MainActivityBinding;
 import fr.louisparet.journeydiaries.fragments.CreatorFragment;
@@ -23,6 +28,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SqlScoutServer.create(this, getPackageName());
+        File file = new File(getFilesDir().toString());
+        if(file.isDirectory()) {
+            Log.d("File",file.getAbsolutePath());
+            for (String fileR : file.list())
+                Log.d("File", fileR);
+        }
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.main_activity);
         this.showStartup();

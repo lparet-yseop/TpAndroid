@@ -29,6 +29,7 @@ public abstract class AbstractService<T> {
         List<T> objects = new ArrayList<>();
         T object;
         Cursor cursor = db.rawQuery("SELECT * FROM " + table, null);
+        Log.d("SQL","Count "+cursor.getCount());
         try {
             if (cursor.moveToFirst()) {
                 do {

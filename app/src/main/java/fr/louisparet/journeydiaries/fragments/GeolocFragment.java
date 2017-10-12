@@ -29,6 +29,7 @@ import fr.louisparet.journeydiaries.MainActivity;
 import fr.louisparet.journeydiaries.R;
 import fr.louisparet.journeydiaries.databinding.GeolocBinding;
 import fr.louisparet.journeydiaries.databinding.JourneyCreatorBinding;
+import fr.louisparet.journeydiaries.interaction.MainActivityContract;
 import fr.louisparet.journeydiaries.models.Marker;
 import fr.louisparet.journeydiaries.permission.PermissionHelper;
 import fr.louisparet.journeydiaries.service.GpsTracker;
@@ -44,6 +45,8 @@ public class GeolocFragment extends Fragment implements OnMapReadyCallback, Goog
     MainActivity mainActivity;
 
     MarkerService markerService;
+    com.google.android.gms.maps.model.Marker gmapSelectedMarker;
+    GeolocBinding binding;
 
     GoogleMap mmap;
     GpsTracker gps;
@@ -51,12 +54,14 @@ public class GeolocFragment extends Fragment implements OnMapReadyCallback, Goog
     Marker selectedMarker;
     List<Marker> markers;
 
+    View view;
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        GeolocBinding binding = DataBindingUtil.inflate(inflater, R.layout.geoloc,container,false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.geoloc,container,false);
 
         MapFragment mapFragment = (MapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -67,6 +72,8 @@ public class GeolocFragment extends Fragment implements OnMapReadyCallback, Goog
                 initButton();
             }
         });
+
+
         markerService = new MarkerService(binding.getRoot().getContext());
         markers = markerService.findAll();
 
@@ -74,7 +81,10 @@ public class GeolocFragment extends Fragment implements OnMapReadyCallback, Goog
     }
 
     private void initButton(){
-
+        String newValue = binding.editText2.getText().toString();
+        this.selectedMarker.setName(newValue);
+        markerService.update(this.selectedMarker);
+        this.gmapSelectedMarker.setTitle(newValue);
     }
 
     @Override
@@ -96,11 +106,13 @@ public class GeolocFragment extends Fragment implements OnMapReadyCallback, Goog
         updateView(latLng);
         this.selectedMarker = new Marker(latLng.longitude, latLng.latitude, "Nouveau marqueur");
         markerService.save(this.selectedMarker);
+        markers.add(this.selectedMarker);
+        MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("Nouveau marqueur");
+        this.mmap.addMarker(markerOptions);
     }
 
     @Override
     public void onMapReady(GoogleMap map) {
-        map.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
         this.mmap = map;
         map.setOnMapLongClickListener(this);
         map.setOnMarkerClickListener(this);
@@ -142,8 +154,6 @@ public class GeolocFragment extends Fragment implements OnMapReadyCallback, Goog
     public void updateView(LatLng latLng ){
         if(mmap != null) {
             this.mmap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5));
-            MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("Nouveau marqueur");
-            this.mmap.addMarker(markerOptions);
         }
     }
 
@@ -151,9 +161,13 @@ public class GeolocFragment extends Fragment implements OnMapReadyCallback, Goog
     @Override
     public boolean onMarkerClick(com.google.android.gms.maps.model.Marker marker) {
         System.out.println(" Id: " + marker.getId() + " Title: " + marker.getTitle() + " position: " + marker.getPosition() +" TAG : " + marker.getTag());
-        String tag =  marker.getTag().toString().substring(1);
-        int id = Integer.parseInt(tag) - 1;
-        this.selectedMarker = markers.get(id);
+        String tag =  marker.getId().toString().substring(1);
+        int id = Integer.parseInt(tag);
+        if(id >= 1 && id < markers.size()){
+            this.selectedMarker = markers.get(id);
+        }
+        this.gmapSelectedMarker = marker;
+        binding.editText2.setText(selectedMarker.getName());
         return false;
     }
 }
