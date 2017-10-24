@@ -85,6 +85,7 @@ public class GeolocFragment extends Fragment implements OnMapReadyCallback, Goog
         this.selectedMarker.setName(newValue);
         markerService.update(this.selectedMarker);
         this.gmapSelectedMarker.setTitle(newValue);
+        this.gmapSelectedMarker.showInfoWindow();
     }
 
     @Override
@@ -102,13 +103,14 @@ public class GeolocFragment extends Fragment implements OnMapReadyCallback, Goog
 
     @Override
     public void onMapLongClick(LatLng latLng) {
-
+        String text = "Nouveau marqueur";
         updateView(latLng);
-        this.selectedMarker = new Marker(latLng.longitude, latLng.latitude, "Nouveau marqueur");
+        this.selectedMarker = new Marker(latLng.longitude, latLng.latitude, text);
         markerService.save(this.selectedMarker);
         markers.add(this.selectedMarker);
-        MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("Nouveau marqueur");
-        this.mmap.addMarker(markerOptions);
+        MarkerOptions markerOptions = new MarkerOptions().position(latLng).title(text);
+        this.gmapSelectedMarker = this.mmap.addMarker(markerOptions);
+        binding.editText2.setText(text);
     }
 
     @Override
@@ -163,7 +165,7 @@ public class GeolocFragment extends Fragment implements OnMapReadyCallback, Goog
         System.out.println(" Id: " + marker.getId() + " Title: " + marker.getTitle() + " position: " + marker.getPosition() +" TAG : " + marker.getTag());
         String tag =  marker.getId().toString().substring(1);
         int id = Integer.parseInt(tag);
-        if(id >= 1 && id < markers.size()){
+        if(id >= 0 && id < markers.size()){
             this.selectedMarker = markers.get(id);
         }
         this.gmapSelectedMarker = marker;
